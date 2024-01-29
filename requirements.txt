@@ -1,0 +1,8 @@
+datasets==2.16.1
+itables==1.6.3
+nltk==3.8.1
+numpy==1.25.2
+pandas==2.2.0
+streamlit==1.29.0
+streamlit_jupyter==0.2.1
+transformers==4.36.1
