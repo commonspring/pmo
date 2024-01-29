@@ -36,16 +36,26 @@ st.write("All enquiries to pmo[at]commonspring.maskmy.id")
 
 
 # %% 240117_MC_Text_App_3.ipynb 3
-with st.spinner(text='Loading data...'):
-    mc_articles = pd.read_parquet("data/mc_us_national_articles_text_0103.parquet")[['id', 'media_name', 'publish_date', 'title', 'article_url',
+@st.cache_data
+def load_articles():
+    df = pd.read_parquet("https://github.com/commonspring/pmo/data/mc_us_national_articles_text_0103.parquet")[['id', 'media_name', 'publish_date', 'title', 'article_url',
        'media_type', 'partisan', 'broad_partisan', 'text']]
+    return df
+
+@st.cache_data
+def load_sentences():
+    df = pd.read_csv("https://github.com/commonspring/pmo/data/mc_us_national_sentences_filtered_0112.parquet")
+    return df
+
+with st.spinner(text='Loading data...'):
+    mc_articles = load_articles()
     mc_articles["partisan"] = mc_articles["partisan"].astype("category").cat.set_categories(["left", "center left", "center", "center right", "right"], ordered=True)
     mc_articles["broad_partisan"] = mc_articles["broad_partisan"].astype("category").cat.set_categories(["broadly left", "center", "broadly right"], ordered=True)
     mc_articles["text_snippet"] = mc_articles["text"].apply(lambda x: x[:200])
     # mc_features = mc_subset[["id", "publish_date", "title", "article_url", "media_name", "pub_state", "partisan", "broad_partisan"]].copy(deep=True)
 
     # Load text data
-    mc_sents = pd.read_parquet("data/mc_us_national_sentences_filtered_0112.parquet")
+    mc_sents = load_sentences()
     # Add sent split
     mc_sents["sent_split"] = [x.split(" ") for x in mc_sents["sent"]]
     # Add index
