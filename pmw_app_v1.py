@@ -11,6 +11,7 @@ import string
 from datasets import Dataset
 from transformers import AutoTokenizer, TFAutoModel
 import nltk
+nltk.download('stopwords')
 from nltk.corpus import stopwords
 import collections
 from collections import Counter
