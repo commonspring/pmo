@@ -1,5 +1,5 @@
 
-# itables==1.6.3
+itables==1.6.3
 nltk==3.8.1
 numpy==1.25.2
 pandas==2.2.0
