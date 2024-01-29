@@ -38,8 +38,8 @@ st.write("All enquiries to pmo[at]commonspring.maskmy.id")
 # %% 240117_MC_Text_App_3.ipynb 3
 @st.cache_data
 def load_articles():
-    df = pd.read_parquet("https://github.com/commonspring/pmo/blob/a17b00272b47811562deebabdf3d2f0e03bb99c9/data/mc_us_national_articles_text_0103.parquet")[['id', 'media_name', 'publish_date', 'title', 'article_url',
-       'media_type', 'partisan', 'broad_partisan', 'text']]
+    df = pd.read_parquet("https://github.com/commonspring/pmo/blob/a17b00272b47811562deebabdf3d2f0e03bb99c9/data/mc_us_national_articles_text_0103.parquet")
+    df = df[['id', 'media_name', 'publish_date', 'title', 'article_url','media_type', 'partisan', 'broad_partisan', 'text']]
     return df
 
 @st.cache_data
